@@ -5,6 +5,9 @@ import { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCustomers } from "../utils/api";
+import AddCustomer from "./AddCustomer";
+import UpdateCustomer from "./UpdateCustomer";
+import DeleteCustomer from "./DeleteCustomer";
 
 export default function CustomerList() {
   const { data: customers } = useQuery({
@@ -20,6 +23,24 @@ export default function CustomerList() {
     { field: "city" },
     { field: "email" },
     { field: "phone" },
+    {
+      field: "_links.self.href",
+      sortable: false,
+      filter: false,
+      headerName: "",
+      cellRenderer: (params) => (
+        <DeleteCustomer url={params.data._links.self.href} />
+      ),
+    },
+    {
+      field: "_links.self.href",
+      sortable: false,
+      filter: false,
+      headerName: "",
+      cellRenderer: (params) => (
+        <UpdateCustomer currentCustomer={params.data} />
+      ),
+    },
   ]);
 
   const defaultColDef = {
@@ -28,16 +49,17 @@ export default function CustomerList() {
   };
 
   const autoSizeStrategy = {
-    type: "fitCellContents",
-    defaultMinWidth: 120,
+    type: "fitGridWidth",
+    defaultMinWidth: 80,
   };
 
   return (
     <>
       <div className="CustomerList">
+        <AddCustomer />
         <div
           className="ag-theme-material"
-          style={{ width: "100%", height: 600 }}
+          style={{ width: "100%", height: 1000 }}
         >
           <AgGridReact
             rowData={customers}

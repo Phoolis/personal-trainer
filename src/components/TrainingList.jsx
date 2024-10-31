@@ -34,13 +34,16 @@ export default function TrainingList() {
   };
 
   const autoSizeStrategy = {
-    type: "fitCellContents",
-    defaultMinWidth: 120,
+    type: "fitGridWidth",
+    defaultMinWidth: 80,
   };
 
   return (
     <div className="TrainingList">
-      <div className="ag-theme-material" style={{ width: "100%", height: 600 }}>
+      <div
+        className="ag-theme-material"
+        style={{ width: "100%", height: 1000 }}
+      >
         <AgGridReact
           rowData={trainings}
           columnDefs={columnDefs}
