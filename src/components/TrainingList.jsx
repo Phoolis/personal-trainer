@@ -6,6 +6,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { fetchTrainings } from "../utils/api";
+import DeleteTraining from "./DeleteTraining";
 
 export default function TrainingList() {
   const { data: trainings } = useQuery({
@@ -25,6 +26,13 @@ export default function TrainingList() {
       headerName: "Customer Name",
       valueGetter: (params) =>
         `${params.data.customer.firstname} ${params.data.customer.lastname}`,
+    },
+    {
+      field: "",
+      sortable: false,
+      filter: false,
+      headerName: "",
+      cellRenderer: (params) => <DeleteTraining id={params.data.id} />,
     },
   ]);
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import CustomerDialogContent from "./CustomerDialogContent";
 
-export default function AddCar() {
+export default function AddCustomer() {
   const queryClient = useQueryClient();
 
   const addMutation = useMutation({

@@ -53,10 +53,41 @@ const deleteCustomer = async (url) => {
   }
 };
 
+const addTraining = async (training) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(training),
+  };
+  const response = await fetch(
+    "https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings",
+    options
+  );
+  const data = await response.json();
+  return data;
+};
+
+const deleteTraining = async (id) => {
+  const options = {
+    method: "DELETE",
+  };
+  if (window.confirm("Do you really want to delete training?")) {
+    const response = await fetch(
+      "https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings/" +
+        id,
+      options
+    );
+  }
+};
+
 export {
   fetchCustomers,
   fetchTrainings,
   addCustomer,
   updateCustomer,
   deleteCustomer,
+  addTraining,
+  deleteTraining,
 };

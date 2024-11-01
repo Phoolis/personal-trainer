@@ -8,6 +8,7 @@ import { fetchCustomers } from "../utils/api";
 import AddCustomer from "./AddCustomer";
 import UpdateCustomer from "./UpdateCustomer";
 import DeleteCustomer from "./DeleteCustomer";
+import AddTraining from "./AddTraining";
 
 export default function CustomerList() {
   const { data: customers } = useQuery({
@@ -23,6 +24,15 @@ export default function CustomerList() {
     { field: "city" },
     { field: "email" },
     { field: "phone" },
+    {
+      field: "_links.self.href",
+      sortable: false,
+      filter: false,
+      headerName: "",
+      cellRenderer: (params) => (
+        <AddTraining url={params.data._links.self.href} />
+      ),
+    },
     {
       field: "_links.self.href",
       sortable: false,
