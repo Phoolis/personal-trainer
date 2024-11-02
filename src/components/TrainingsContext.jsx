@@ -9,13 +9,13 @@ export const useTrainings = () => {
 };
 
 export const TrainingsProvider = ({ children }) => {
-  const { data: trainings } = useQuery({
+  const { data: trainings = [], isLoading } = useQuery({
     queryKey: ["trainings"],
     queryFn: fetchTrainings,
   });
 
   return (
-    <TrainingsContext.Provider value={trainings}>
+    <TrainingsContext.Provider value={{ trainings, isLoading }}>
       {children}
     </TrainingsContext.Provider>
   );

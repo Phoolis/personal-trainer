@@ -25,34 +25,34 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Router>
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6">Personal Trainer</Typography>
-              <Box sx={{ display: "flex", marginLeft: "4em", gap: 4 }}>
-                <Button color="inherit" component={Link} to="/customers">
-                  Customers
-                </Button>
-                <Button color="inherit" component={Link} to="/trainings">
-                  Trainings
-                </Button>
-                <Button color="inherit" component={Link} to="/calendar">
-                  Calendar
-                </Button>
-              </Box>
-            </Toolbar>
-          </AppBar>
-          <Container maxWidth="x1" sx={{ mt: 1, mb: 1 }}>
-            <TrainingsProvider>
+        <TrainingsProvider>
+          <Router>
+            <AppBar position="static">
+              <Toolbar>
+                <Typography variant="h6">Personal Trainer</Typography>
+                <Box sx={{ display: "flex", marginLeft: "4em", gap: 4 }}>
+                  <Button color="inherit" component={Link} to="/customers">
+                    Customers
+                  </Button>
+                  <Button color="inherit" component={Link} to="/trainings">
+                    Trainings
+                  </Button>
+                  <Button color="inherit" component={Link} to="/calendar">
+                    Calendar
+                  </Button>
+                </Box>
+              </Toolbar>
+            </AppBar>
+            <Container maxWidth="x1" sx={{ mt: 1, mb: 1 }}>
               <Routes>
                 <Route path="/" element={<CustomerList />} />
                 <Route path="/customers" element={<CustomerList />} />
                 <Route path="/trainings" element={<TrainingList />} />
                 <Route path="/calendar" element={<TrainingCalendar />} />
               </Routes>
-            </TrainingsProvider>
-          </Container>
-        </Router>
+            </Container>
+          </Router>
+        </TrainingsProvider>
       </LocalizationProvider>
     </QueryClientProvider>
   );

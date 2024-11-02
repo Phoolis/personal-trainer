@@ -8,7 +8,11 @@ import DeleteTraining from "./DeleteTraining";
 import { useTrainings } from "./TrainingsContext";
 
 export default function TrainingList() {
-  const trainings = useTrainings();
+  const { trainings, isLoading } = useTrainings();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const [columnDefs, setColumnDefs] = useState([
     {
