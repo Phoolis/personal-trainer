@@ -3,16 +3,12 @@ import "ag-grid-community/styles/ag-theme-material.css"; // Material Design them
 
 import { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { fetchTrainings } from "../utils/api";
 import DeleteTraining from "./DeleteTraining";
+import { useTrainings } from "./TrainingsContext";
 
 export default function TrainingList() {
-  const { data: trainings } = useQuery({
-    queryKey: ["trainings"],
-    queryFn: fetchTrainings,
-  });
+  const trainings = useTrainings();
 
   const [columnDefs, setColumnDefs] = useState([
     {
