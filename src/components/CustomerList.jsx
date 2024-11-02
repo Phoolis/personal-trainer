@@ -1,9 +1,10 @@
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css"; // Material Design theme
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { useQuery } from "@tanstack/react-query";
+import { Box, Button } from "@mui/material";
 import { fetchCustomers } from "../utils/api";
 import AddCustomer from "./AddCustomer";
 import UpdateCustomer from "./UpdateCustomer";
@@ -11,6 +12,21 @@ import DeleteCustomer from "./DeleteCustomer";
 import AddTraining from "./AddTraining";
 
 export default function CustomerList() {
+  const gridRef = useRef(null); // references the ag-grid instance
+  const exportOptions = {
+    fileName: "customers.csv",
+    suppressQuotes: true,
+    columnKeys: [
+      "firstname",
+      "lastname",
+      "streetaddress",
+      "postcode",
+      "city",
+      "email",
+      "phone",
+    ],
+  };
+
   const { data: customers } = useQuery({
     queryKey: ["customers"],
     queryFn: fetchCustomers,
@@ -25,28 +41,22 @@ export default function CustomerList() {
     { field: "email" },
     { field: "phone" },
     {
-      field: "_links.self.href",
       sortable: false,
       filter: false,
-      headerName: "",
       cellRenderer: (params) => (
         <AddTraining url={params.data._links.self.href} />
       ),
     },
     {
-      field: "_links.self.href",
       sortable: false,
       filter: false,
-      headerName: "",
       cellRenderer: (params) => (
         <DeleteCustomer url={params.data._links.self.href} />
       ),
     },
     {
-      field: "_links.self.href",
       sortable: false,
       filter: false,
-      headerName: "",
       cellRenderer: (params) => (
         <UpdateCustomer currentCustomer={params.data} />
       ),
@@ -66,12 +76,21 @@ export default function CustomerList() {
   return (
     <>
       <div className="CustomerList">
-        <AddCustomer />
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <AddCustomer />
+          <Button
+            onClick={() => gridRef.current.api.exportDataAsCsv(exportOptions)}
+          >
+            Export to CSV
+          </Button>
+        </Box>
+
         <div
           className="ag-theme-material"
           style={{ width: "100%", height: 1000 }}
         >
           <AgGridReact
+            ref={gridRef}
             rowData={customers}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}

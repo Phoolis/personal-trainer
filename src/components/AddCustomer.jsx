@@ -46,7 +46,9 @@ export default function AddCustomer() {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Add customer</Button>
+      <Button variant="contained" onClick={handleClickOpen}>
+        Add customer
+      </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New customer</DialogTitle>
         <CustomerDialogContent
