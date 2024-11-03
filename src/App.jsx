@@ -16,6 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CustomerList from "./components/CustomerList";
 import TrainingList from "./components/TrainingList";
 import TrainingCalendar from "./components/TrainingCalendar";
+import TrainingStats from "./components/TrainingStats";
 import { TrainingsProvider } from "./components/TrainingsContext";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,9 @@ function App() {
                   <Button color="inherit" component={Link} to="/calendar">
                     Calendar
                   </Button>
+                  <Button color="inherit" component={Link} to="/stats">
+                    Activity Stats
+                  </Button>
                 </Box>
               </Toolbar>
             </AppBar>
@@ -49,6 +53,7 @@ function App() {
                 <Route path="/customers" element={<CustomerList />} />
                 <Route path="/trainings" element={<TrainingList />} />
                 <Route path="/calendar" element={<TrainingCalendar />} />
+                <Route path="/stats" element={<TrainingStats />} />
               </Routes>
             </Container>
           </Router>
