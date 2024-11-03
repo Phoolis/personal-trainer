@@ -27,7 +27,7 @@ function App() {
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <TrainingsProvider>
-          <Router>
+          <Router basename="/personal-trainer/">
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h6">Personal Trainer</Typography>
